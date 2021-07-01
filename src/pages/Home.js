@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 
 import {
@@ -26,6 +27,10 @@ export function Home() {
         </TouchableOpacity>
 
         <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
+
+        <TouchableOpacity style={styles.buttonSkill}>
+          <Text style={styles.textSkill}>Teste</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
@@ -63,6 +68,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#FFF',
     fontSize: 17,
+    fontWeight: 'bold',
+  },
+  buttonSkill: {
+    backgroundColor: '#1F1E25',
+    padding: 15,
+    borderRadius: 50,
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  textSkill: {
+    color: '#FFF',
+    fontSize: 22,
     fontWeight: 'bold',
   },
 });
