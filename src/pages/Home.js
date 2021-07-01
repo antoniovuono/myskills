@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   View,
@@ -11,6 +11,13 @@ import {
 } from 'react-native';
 
 export function Home() {
+  const [newSkill, setNewSkill] = useState('');
+  const [mySkills, setMySkills] = useState([]);
+
+  function handleAddNewSkill() {
+    setMySkills(oldState => [...oldState, newSkill]);
+  }
+
   return (
     <>
       <View style={styles.container}>
@@ -20,17 +27,23 @@ export function Home() {
           style={styles.input}
           placeholder="New skill"
           placeholderTextColor="#555"
+          onChangeText={setNewSkill}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          activeOpacity={0.7}
+          onPress={handleAddNewSkill}>
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
 
         <Text style={[styles.title, {marginVertical: 50}]}>My Skills</Text>
 
-        <TouchableOpacity style={styles.buttonSkill}>
-          <Text style={styles.textSkill}>Teste</Text>
-        </TouchableOpacity>
+        {mySkills.map(skill => (
+          <TouchableOpacity key={skill} style={styles.buttonSkill}>
+            <Text style={styles.textSkill}>{skill}</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </>
   );
