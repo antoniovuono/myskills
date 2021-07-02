@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
@@ -16,15 +16,30 @@ import {
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
   const [mySkills, setMySkills] = useState([]);
+  const [greetings, setGreetings] = useState('');
 
   function handleAddNewSkill() {
     setMySkills(oldState => [...oldState, newSkill]);
   }
 
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+
+    if (currentHour < 12) {
+      setGreetings('Good morning');
+    } else if (currentHour >= 12 && currentHour < 18) {
+      setGreetings('Good afternoon');
+    } else {
+      setGreetings('Good night');
+    }
+  }, []);
+
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome, Antonio!</Text>
+
+        <Text style={styles.greetings}>{greetings}</Text>
 
         <TextInput
           style={styles.input}
@@ -68,5 +83,8 @@ const styles = StyleSheet.create({
     padding: Platform.OS === 'ios' ? 15 : 10,
     marginTop: 30,
     borderRadius: 7,
+  },
+  greetings: {
+    color: '#fff',
   },
 });
